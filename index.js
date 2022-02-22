@@ -6,10 +6,20 @@ inquirer
     {
       name: 'functionName',
       message: 'What should your function be called?',
-      default: 'generator',
+    },
+    {
+      type: 'checkbox',
+      name: 'fileTypes',
+      message: 'Which files should be created?',
+      choices: ['Component', 'Spec', 'Stories'],
+      validate: answer => {
+        if (answer.length < 1) {
+          return 'Please choose at least one line';
+        }
+        return true;
+      },
     },
   ])
   .then(answers => {
     func.writeFile(answers.functionName);
-    console.info('Answers:', answers.functionName);
   });
