@@ -1,13 +1,15 @@
 const func = require('./writeFile');
+const inquirer = require('inquirer');
 
-const readline = require('readline');
-const { stdin: input, stdout: output } = require('process');
-
-const rl = readline.createInterface({ input, output });
-
-rl.question('What is the function called?', answer => {
-  func.writeFile(answer);
-  console.log(answer);
-
-  rl.close();
-});
+inquirer
+  .prompt([
+    {
+      name: 'functionName',
+      message: 'What should your function be called?',
+      default: 'generator',
+    },
+  ])
+  .then(answers => {
+    func.writeFile(answers.functionName);
+    console.info('Answers:', answers.functionName);
+  });

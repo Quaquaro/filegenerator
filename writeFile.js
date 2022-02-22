@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function writeFile(name) {
   fs.writeFileSync(
-    `./${name}`,
+    `./${name}.js`,
     `function ${name} () {
 
     }`
