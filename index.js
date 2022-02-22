@@ -5,13 +5,13 @@ inquirer
   .prompt([
     {
       name: 'functionName',
-      message: 'What should your function be called?',
+      message: 'What should your component be called?',
     },
     {
       type: 'checkbox',
       name: 'fileTypes',
       message: 'Which files should be created?',
-      choices: ['Component', 'Spec', 'Stories'],
+      choices: ['component', 'spec', 'stories'],
       validate: answer => {
         if (answer.length < 1) {
           return 'Please choose at least one line';
@@ -21,5 +21,7 @@ inquirer
     },
   ])
   .then(answers => {
-    func.writeFile(answers.functionName);
+    answers.fileTypes.forEach(type => {
+      func.writeFile(answers.functionName, type);
+    });
   });
