@@ -16,6 +16,7 @@ const template = {
     describe('${name}', () => {
       it('render...', () => {
         render(<${name} />);
+        expect(screen.getByText('${name}')).toBeInTheDocument();
       });
     });
     `;
@@ -26,7 +27,12 @@ const template = {
     export default {
       title: 'Component/${name}',
       component: ${name},
-    };`;
+    }
+      const Template = args => <${name} {...args} />
+
+      export const Default = Template.bind({})
+      Default.args = {}
+    `;
     return storiesString;
   },
 };
